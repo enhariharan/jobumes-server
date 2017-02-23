@@ -1,0 +1,44 @@
+{
+  "name": "jobumes-server",
+  "description": "Backend server for the jobumes service",
+  "version": "0.1.0",
+  "homepage": "https://github.com/enhariharan/jobumes-server",
+  "author": {
+    "name": "Hariharan Narayanan",
+    "email": "enhariharan@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enhariharan/jobumes-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enhariharan/jobumes-server/issues"
+  },
+  "licenses": [
+    {
+      "type": "private",
+      "url": "https://github.com/enhariharan/jobumes-server/blob/master/LICENSE-private"
+    }
+  ],
+  "main": "lib/jobumes-server",
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "scripts": {
+    "start": "node lib/app/jobumes-server.js",
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~1.1.0",
+    "grunt-contrib-nodeunit": "~1.0.0",
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt": "~1.0.1"
+  },
+  "keywords": [],
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "http": "0.0.0",
+    "mongoose": "^4.8.4"
+  }
+}
