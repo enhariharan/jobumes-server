@@ -10,6 +10,7 @@ var Role = require('../lib/models/role-model').Role;
 var User = require('../lib/models/user-model').User;
 var Profile = require('../lib/models/profile-model').Profile;
 var Feedback = require('../lib/models/employeefeedback-model').Feedback;
+var SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 
 var opts = { server: { socketOptions: { keepAlive: 1 } } };
 
