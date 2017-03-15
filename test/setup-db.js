@@ -11,6 +11,7 @@ var User = require('../lib/models/user-model').User;
 var Profile = require('../lib/models/profile-model').Profile;
 var Feedback = require('../lib/models/employeefeedback-model').Feedback;
 var SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
+var Resumes = require('../lib/models/resume-model').Resume;
 
 var opts = { server: { socketOptions: { keepAlive: 1 } } };
 
