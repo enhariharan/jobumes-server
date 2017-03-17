@@ -21,14 +21,6 @@ var configuration = {
     subUserId: 'redgummi',
     timeout: 120 * 1000
   },
-  jdParser: {
-    serviceUrlSoap: 'http://immaculateitjd.rchilli.com/JDParser/services/JDParser?wsdl',
-    serviceUrlRest: '',
-    userKey: 'YOABEO3303Q',
-    version: '2.0',
-    subUserId: 'RedGumm',
-    timeout: 120 * 1000
-  },
 };
 
 module.exports = {configuration};
