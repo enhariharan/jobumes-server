@@ -431,7 +431,6 @@ var setupDB = (dbConnection) => {
     var conn = null;
 
     mongoose.connect(getDbConnection());
-    console.log("parsed resume: %j", resumeBidrohaKumarParija.parsedJson);
     Promise.all([
       roles,
       users,
@@ -440,7 +439,7 @@ var setupDB = (dbConnection) => {
       resumes
     ])
     .then(messages => {
-      console.info('saved objects %j', messages);
+      messages.forEach(m => {console.info('\nsaved %j', m);});
       mongoose.disconnect();
       resolve(true);
     })
