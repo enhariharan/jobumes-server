@@ -7,7 +7,6 @@ const app = require('express')();
 const Utils = require('../lib//models/utilities');
 const Config = require('../configuration').configuration;
 const Role = require('../lib/models/role-model').Role;
-const User = require('../lib/models/user-model').User;
 const Profile = require('../lib/models/profile-model').Profile;
 const Feedback = require('../lib/models/employeefeedback-model').Feedback;
 const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
@@ -48,229 +47,167 @@ var roles = [
   roleJobSeeker.save(),
 ];
 
-var userAdmin = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'surya@snigdha.co.in',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleAdmin.uuid
-});
-var userBidrohaKumarParija = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'bidroha@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userChandrapriyaValluri = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'chandrapriya302@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userChinnaKutumbaRaoDadi = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'chinnatherron@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userSatyanarayanaReddyK = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'satyakng.194@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userLakshmiPriyankaGorantla = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'priya.gorntla@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userRamyaReddyB = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'ramyapinky09@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userSruthiNallamothu = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'n.sruthi1995@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userSudeepKiran = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'kiransudeep@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userVijayaSyamKumarDamaraju = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'vijaydsk@outlook.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var userVinodKumarRayana = new User({
-  uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
-  username: 'vinodkumar.rayana567@gmail.com',
-  password: 'password',
-  phonenumber: '+911234567890',
-  status: 'activated',
-  role: roleJobSeeker.uuid
-});
-var users = [
-  userAdmin.save(),
-  userBidrohaKumarParija.save(),
-  userChandrapriyaValluri.save(),
-  userChinnaKutumbaRaoDadi.save(),
-  userSatyanarayanaReddyK.save(),
-  userLakshmiPriyankaGorantla.save(),
-  userRamyaReddyB.save(),
-  userSruthiNallamothu.save(),
-  userSudeepKiran.save(),
-  userVijayaSyamKumarDamaraju.save(),
-  userVinodKumarRayana.save(),
-];
-
 var profileAdmin = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleAdmin.uuid,
+  login: { username: 'surya@snigdha.co.in', password: 'password', },
   firstName: 'Surya',
   lastName: 'Vempati',
-  middleName: '',
   gender: 'male',
-  profilePicPath: '',
-  user: userAdmin.uuid,
+  email: 'surya@snigdha.co.in',
+  phoneNumber: '+911234567890',
 });
+
 var profileBidrohaKumarParija = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'bidroha@gmail.com', password: 'password', },
   firstName: 'Bidroha',
   lastName: 'Parija',
   middleName: 'Kumar',
   gender: 'male',
-  profilePicPath: '',
-  user: userBidrohaKumarParija.uuid,
+  email: 'bidroha@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileChandrapriyaValluri = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'chandrapriya302@gmail.com', password: 'password', },
   firstName: 'Chandrapriya',
   lastName: 'Valluri',
-  middleName: '',
   gender: 'female',
-  profilePicPath: '',
-  user: userChandrapriyaValluri.uuid,
+  email: 'chandrapriya302@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileChinnaKutumbaRaoDadi = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'chinnatherron@gmail.com', password: 'password', },
   firstName: 'Chinna',
   lastName: 'Dadi',
   middleName: 'Kutumba Rao',
   gender: 'male',
-  profilePicPath: '',
-  user: userChinnaKutumbaRaoDadi.uuid,
+  email: 'chandrapriya302@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileSatyanarayanaReddyK = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'satyakng.194@gmail.com', password: 'password', },
   firstName: 'Satyanarayana',
   lastName: 'Reddy',
   middleName: 'K',
   gender: 'male',
-  profilePicPath: '',
-  user: userSatyanarayanaReddyK.uuid,
+  email: 'satyakng.194@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileLakshmiPriyankaGorantla = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'priya.gorntla@gmail.com', password: 'password', },
   firstName: 'Lakshmi',
   lastName: 'Gorantla',
   middleName: 'Priyanka',
   gender: 'female',
-  profilePicPath: '',
-  user: userLakshmiPriyankaGorantla.uuid,
+  email: 'priya.gorntla@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileRamyaReddyB = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'ramyapinky09@gmail.com', password: 'password', },
   firstName: 'Ramya',
   lastName: 'Reddy',
   middleName: 'B',
   gender: 'female',
-  profilePicPath: '',
-  user: userRamyaReddyB.uuid,
+  email: 'ramyapinky09@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileSruthiNallamothu = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'n.sruthi1995@gmail.com', password: 'password', },
   firstName: 'Sruthi',
   lastName: 'Nallamothu',
   middleName: '',
   gender: 'female',
-  profilePicPath: '',
-  user: userSruthiNallamothu.uuid,
+  email: 'n.sruthi1995@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileSudeepKiran = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'kiransudeep@gmail.com', password: 'password', },
   firstName: 'Sudeep',
   lastName: 'Kiran',
-  middleName: '',
   gender: 'male',
-  profilePicPath: '',
-  user: userSudeepKiran.uuid,
+  email: 'kiransudeep@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileVijayaSyamKumarDamaraju = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'vijaydsk@outlook.com', password: 'password', },
   firstName: 'Vijaya',
   lastName: 'Damaraju',
   middleName: 'Syam Kumar',
   gender: 'male',
-  profilePicPath: '',
-  user: userVijayaSyamKumarDamaraju.uuid,
+  email: 'vijaydsk@outlook.com',
+  phoneNumber: '+911234567890',
 });
+
 var profileVinodKumarRayana = new Profile({
   uuid: Utils.getUuid(),
-  timestamp: Utils.getTimestamp(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleJobSeeker.uuid,
+  login: { username: 'vinodkumar.rayana567@gmail.com', password: 'password', },
   firstName: 'Vinod Kumar',
   lastName: 'Rayana',
-  middleName: '',
   gender: 'male',
-  profilePicPath: '',
-  user: userVinodKumarRayana.uuid,
+  email: 'vinodkumar.rayana567@gmail.com',
+  phoneNumber: '+911234567890',
 });
+
 var profiles = [
   profileAdmin.save(),
   profileBidrohaKumarParija.save(),
@@ -294,6 +231,7 @@ var resumeBidrohaKumarParija = new Resume({
   parsedJson: parsedResumeBidrohaKumarParija,
   profile: profileBidrohaKumarParija.uuid,
 });
+
 var resumeChandrapriyaValluri = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -303,6 +241,7 @@ var resumeChandrapriyaValluri = new Resume({
   parsedJson: require('./resume-chandrapriya-valluri'),
   profile: profileChandrapriyaValluri.uuid,
 });
+
 var resumeChinnaKutumbaRaoDadi = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -312,6 +251,7 @@ var resumeChinnaKutumbaRaoDadi = new Resume({
   parsedJson: parsedResumeChinnaKutumbaRaoDadi,
   profile: profileChinnaKutumbaRaoDadi.uuid,
 });
+
 var resumeLakshmiPriyankaGorantla = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -321,6 +261,7 @@ var resumeLakshmiPriyankaGorantla = new Resume({
   parsedJson: parsedResumeLakshmiPriyankaGorantla,
   profile: profileLakshmiPriyankaGorantla.uuid,
 });
+
 var resumeRamyaReddyB = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -330,6 +271,7 @@ var resumeRamyaReddyB = new Resume({
   parsedJson: parsedResumeRamyaReddyB,
   profile: profileRamyaReddyB.uuid,
 });
+
 var resumeSatyanarayanaReddyK = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -339,6 +281,7 @@ var resumeSatyanarayanaReddyK = new Resume({
   parsedJson: parsedResumeSatyanarayanaReddyK,
   profile: profileSatyanarayanaReddyK.uuid,
 });
+
 var resumeSruthiNallamothu = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -348,6 +291,7 @@ var resumeSruthiNallamothu = new Resume({
   parsedJson: parsedResumeSruthiNallamothu,
   profile: profileSruthiNallamothu.uuid,
 });
+
 var resumeSudeepKiran = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -357,6 +301,7 @@ var resumeSudeepKiran = new Resume({
   parsedJson: parsedResumeSudeepKiran,
   profile: profileSudeepKiran.uuid,
 });
+
 var resumeVijayaSyamKumarDamaraju = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -366,6 +311,7 @@ var resumeVijayaSyamKumarDamaraju = new Resume({
   parsedJson: parsedResumeVijayaSyamKumarDamaraju,
   profile: profileVijayaSyamKumarDamaraju.uuid,
 });
+
 var resumeVinodKumarRayana = new Resume({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -375,6 +321,7 @@ var resumeVinodKumarRayana = new Resume({
   parsedJson: parsedResumeVinodKumarRayana,
   profile: profileVinodKumarRayana.uuid,
 });
+
 var resumes = [
   resumeBidrohaKumarParija.save(),
   resumeChandrapriyaValluri.save(),
@@ -398,6 +345,7 @@ var feedback1 = new Feedback({
   subject: 'feedback 1',
   comment: 'This is a example comment',
 });
+
 var feedback2 = new Feedback({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
@@ -408,6 +356,7 @@ var feedback2 = new Feedback({
   subject: 'feedback 2',
   comment: 'This is another example comment',
 });
+
 var feedbacks = [
   feedback1.save(),
   feedback2.save(),
@@ -431,16 +380,14 @@ var setupDB = (dbConnection) => {
     var conn = null;
 
     mongoose.connect(getDbConnection());
-    console.log("parsed resume: %j", resumeBidrohaKumarParija.parsedJson);
     Promise.all([
       roles,
-      users,
       profiles,
       feedbacks,
       resumes
     ])
     .then(messages => {
-      console.info('saved objects %j', messages);
+      messages.forEach(m => {console.info('\nsaved: %j', m);});
       mongoose.disconnect();
       resolve(true);
     })
