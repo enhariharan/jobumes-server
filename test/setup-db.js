@@ -12,18 +12,6 @@ const Feedback = require('../lib/models/employeefeedback-model').Feedback;
 const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 const Resume = require('../lib/models/resume-model').Resume;
 
-var parsedResumeBidrohaKumarParija = require('./resume-bidroha-kumar-parija');
-var parsedResumeChandrapriyaValluri = require('./resume-chandrapriya-valluri');
-var parsedResumeChinnaKutumbaRaoDadi = require('./resume-chinna-kutumbarao-dadi');
-var parsedResumeLakshmiPriyankaGorantla = require('./resume-lakshmi-priyanka-gorantla');
-var parsedResumeRamyaReddyB = require('./resume-ramya-reddy-b');
-var parsedResumeSatyanarayanaReddyK = require('./resume-satyanarayana-reddy-k');
-var parsedResumeSruthiNallamothu = require('./resume-sruthi-nallamothu');
-var parsedResumeSudeepKiran = require('./resume-sudeep-kiran');
-var parsedResumeVijayaSyamKumarDamaraju = require('./resume-vijaya-syam-kumar-damaraju');
-var parsedResumeVinodKumarRayana = require('./resume-vinod-kumar-rayana');
-
-
 const opts = { server: { socketOptions: { keepAlive: 1 } } };
 
 var roleAdmin = new Role({
@@ -221,6 +209,17 @@ var profiles = [
   profileVijayaSyamKumarDamaraju.save(),
   profileVinodKumarRayana.save(),
 ];
+
+const parsedResumeBidrohaKumarParija = require('./resume-bidroha-kumar-parija');
+const parsedResumeChandrapriyaValluri = require('./resume-chandrapriya-valluri');
+const parsedResumeChinnaKutumbaRaoDadi = require('./resume-chinna-kutumbarao-dadi');
+const parsedResumeLakshmiPriyankaGorantla = require('./resume-lakshmi-priyanka-gorantla');
+const parsedResumeRamyaReddyB = require('./resume-ramya-reddy-b');
+const parsedResumeSatyanarayanaReddyK = require('./resume-satyanarayana-reddy-k');
+const parsedResumeSruthiNallamothu = require('./resume-sruthi-nallamothu');
+const parsedResumeSudeepKiran = require('./resume-sudeep-kiran');
+const parsedResumeVijayaSyamKumarDamaraju = require('./resume-vijaya-syam-kumar-damaraju');
+const parsedResumeVinodKumarRayana = require('./resume-vinod-kumar-rayana');
 
 var resumeBidrohaKumarParija = new Resume({
   uuid: Utils.getUuid(),
