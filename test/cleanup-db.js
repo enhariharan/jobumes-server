@@ -47,7 +47,7 @@ function _createPromises(args, conn) {
         case '--roles':          promises.push(conn.model('Role').remove()); break;
         case '--profiles':       promises.push(conn.model('Profile').remove()); break;
         case '--resumes':       promises.push(conn.model('Resume').remove()); break;
-        case '--feedbacks':      promises.push(conn.model('feedback').remove()); break;
+        case '--feedbacks':       promises.push(conn.model('Feedback').remove()); break;
         case '-a': // fall-through to --all
         case '--all':
           promises.push(conn.model('Role').remove());

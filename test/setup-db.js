@@ -386,7 +386,7 @@ var setupDB = (dbConnection) => {
       resumes
     ])
     .then(messages => {
-      messages.forEach(m => {console.info('\nsaved: %j', m);});
+      messages.forEach(m => {console.info('\nsaved %j', m);});
       mongoose.disconnect();
       resolve(true);
     })
