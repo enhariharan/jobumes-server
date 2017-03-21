@@ -5,10 +5,10 @@
 var app = require('express')();
 var mongoose = require('mongoose');
 var utilities = require('../lib/models/utilities');
-var credentials = require('../configuration');
+var Config = require('../configuration').configuration;
 var Role = require('../lib/models/role-model').Role;
-var User = require('../lib/models/models/user-model').User;
-var Profile = require('../lib/models/models/profile-model').Profile;
+var User = require('../lib/models/user-model').User;
+var Profile = require('../lib/models/profile-model').Profile;
 var Feedback = require('../lib/models/employeefeedback-model').Feedback;
 var SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 var Resumes = require('../lib/models/resume-model').Resume;
@@ -25,6 +25,8 @@ var printHelp = () => {
     '--profiles: Removes all documents in profiles collection.\n' +
     '--roles: Removes all documents in roles collection.\n' +
     '--users: Removes all documents in users collection.\n' +
+    '--resumes: Removes all resumes in users collection.\n' +
+    '--feedbacks: Removes all feedbacks in users collection.\n' +
     '\n[EXAMPLE USAGE] \n' +
     '1. node cleanup-data.js --all \n' +
     'Removes all documents from all collections. \n' +
@@ -50,11 +52,15 @@ function _createPromises(args, conn) {
         case '--roles':          promises.push(conn.model('Role').remove()); break;
         case '--users':          promises.push(conn.model('User').remove()); break;
         case '--profiles':       promises.push(conn.model('Profile').remove()); break;
+        case '--resumes':       promises.push(conn.model('Resume').remove()); break;
+        case '--feedbacks':       promises.push(conn.model('Feedback').remove()); break;
         case '-a': // fall-through to --all
         case '--all':
           promises.push(conn.model('Role').remove());
           promises.push(conn.model('User').remove());
           promises.push(conn.model('Profile').remove());
+          promises.push(conn.model('Resume').remove());
+          promises.push(conn.model('Feedback').remove());
           break;
         case '-h': // fall-through to --help
         case '--help': // fall-through to default
@@ -71,7 +77,7 @@ function _createPromises(args, conn) {
 function _createDbConnection(dbConnection) {
   return new Promise((resolve, reject) => {
     var conn = (!dbConnection || dbConnection === undefined)
-    ? mongoose.createConnection(credentials.getDbConnection(app.get('env')), opts)
+    ? mongoose.createConnection(Config.mongo.development.connectionString, opts)
     : dbConnection;
 
     conn.on('connecting', () => {console.log('\nconnecting to DB');});
