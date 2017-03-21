@@ -4,16 +4,14 @@
  */
 var app = require('express')();
 var mongoose = require('mongoose');
-var utilities = require('../lib/models/utilities');
-var Config = require('../configuration').configuration;
-var Role = require('../lib/models/role-model').Role;
-var User = require('../lib/models/user-model').User;
-var Profile = require('../lib/models/profile-model').Profile;
-var Feedback = require('../lib/models/employeefeedback-model').Feedback;
-var SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
-var Resumes = require('../lib/models/resume-model').Resume;
 
-var opts = { server: { socketOptions: { keepAlive: 1 } } };
+const Config = require('../configuration').configuration;
+const Role = require('../lib/models/role-model').Role;
+const Profile = require('../lib/models/profile-model').Profile;
+const Feedback = require('../lib/models/employeefeedback-model').Feedback;
+const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
+const Resume = require('../lib/models/resume-model').Resume;
+const opts = { server: { socketOptions: { keepAlive: 1 } } };
 
 var printHelp = () => {
   console.log(
@@ -22,11 +20,10 @@ var printHelp = () => {
     '\n[OPTIONS] \n' +
     '-h [or] --help: Prints this help message \n' +
     '-a [or] --all: Removes all documents from all collections. This is the default option if no other option is provided.\n' +
-    '--profiles: Removes all documents in profiles collection.\n' +
     '--roles: Removes all documents in roles collection.\n' +
-    '--users: Removes all documents in users collection.\n' +
-    '--resumes: Removes all resumes in users collection.\n' +
-    '--feedbacks: Removes all feedbacks in users collection.\n' +
+    '--profiles: Removes all documents in profiles collection.\n' +
+    '--resumes: Removes all resumes in resumes collection.\n' +
+    '--feedbacks: Removes all feedbacks in feedcbacks collection.\n' +
     '\n[EXAMPLE USAGE] \n' +
     '1. node cleanup-data.js --all \n' +
     'Removes all documents from all collections. \n' +
@@ -34,8 +31,6 @@ var printHelp = () => {
     'Removes all documents from all collections. \n' +
     '3. node cleanup-data.js --deviceReadings \n' +
     'Removes all documents from deviceReadings only while keeping all other collections intact. \n' +
-    '4. node cleanup-data.js --profiles --users \n' +
-    'Removes all documents from profiles and users collections only. \n' +
     '5. node cleanup-data.js --help \n' +
     'Displays this help message. \n' +
     '6. node cleanup-data.js --xyz \n' +
@@ -50,14 +45,12 @@ function _createPromises(args, conn) {
     args.forEach(arg => {
       switch (arg) {
         case '--roles':          promises.push(conn.model('Role').remove()); break;
-        case '--users':          promises.push(conn.model('User').remove()); break;
         case '--profiles':       promises.push(conn.model('Profile').remove()); break;
         case '--resumes':       promises.push(conn.model('Resume').remove()); break;
         case '--feedbacks':       promises.push(conn.model('Feedback').remove()); break;
         case '-a': // fall-through to --all
         case '--all':
           promises.push(conn.model('Role').remove());
-          promises.push(conn.model('User').remove());
           promises.push(conn.model('Profile').remove());
           promises.push(conn.model('Resume').remove());
           promises.push(conn.model('Feedback').remove());
