@@ -8,7 +8,10 @@ var configuration = {
     production: {connectionString: 'mongodb://produser:resudorp@ds145158.mlab.com:45158/jobumes-prod',},
   },
   resumeParser: {
-    serviceUrl: 'http://redgummi1.rchilli.com/RChilliParser/Rchilli',
+    host: 'redgummi1.rchilli.com',
+    port: 80,
+    path: '/RChilliParser/Rchilli/parseResumeBinary',
+    method:'POST',
     userKey: 'YOABEO3303Q',
     version: '7.0.0',
     subUserId: 'redgummi',
