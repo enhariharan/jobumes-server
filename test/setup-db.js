@@ -11,6 +11,7 @@ const Profile = require('../lib/models/profile-model').Profile;
 const Feedback = require('../lib/models/employeefeedback-model').Feedback;
 const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 const Resume = require('../lib/models/resume-model').Resume;
+const Job = require('../lib/models/job-model').Job;
 
 const opts = { server: { socketOptions: { keepAlive: 1 } } };
 
