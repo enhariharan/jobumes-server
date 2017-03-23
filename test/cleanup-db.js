@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 const Config = require('../configuration').configuration;
 const Role = require('../lib/models/role-model').Role;
 const Profile = require('../lib/models/profile-model').Profile;
-const Feedback = require('../lib/models/employeefeedback-model').Feedback;
+const Feedback = require('../lib/models/feedback-model').Feedback;
 const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 const Resume = require('../lib/models/resume-model').Resume;
 const Job = require('../lib/models/job-model').Job;
@@ -28,6 +28,8 @@ var printHelp = () => {
     '--profiles: Removes all documents in profiles collection.\n' +
     '--resumes: Removes all resumes in resumes collection.\n' +
     '--feedbacks: Removes all feedbacks in feedcbacks collection.\n' +
+    '--jobs: Removes all jobs in jobs collection.\n' +
+    '--jobsApplicants: Removes all jobs in jobApplicant collection.\n' +
     '\n[EXAMPLE USAGE] \n' +
     '1. node cleanup-data.js --all \n' +
     'Removes all documents from all collections. \n' +
@@ -53,12 +55,16 @@ function _createPromises(args, conn) {
         case '--profiles':       promises.push(conn.model('Profile').remove()); break;
         case '--resumes':       promises.push(conn.model('Resume').remove()); break;
         case '--feedbacks':       promises.push(conn.model('Feedback').remove()); break;
+        case '--jobs':       promises.push(conn.model('Job').remove()); break;
+        case '--jobsApplicants':       promises.push(conn.model('JobApplicant').remove()); break;
         case '-a': // fall-through to --all
         case '--all':
           promises.push(conn.model('Role').remove());
           promises.push(conn.model('Profile').remove());
           promises.push(conn.model('Resume').remove());
           promises.push(conn.model('Feedback').remove());
+          promises.push(conn.model('Job').remove());
+          promises.push(conn.model('JobApplicant').remove());
           break;
         case '-h': // fall-through to --help
         case '--help': // fall-through to default

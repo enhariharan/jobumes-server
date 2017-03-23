@@ -379,6 +379,33 @@ var feedbacks = [
   feedback2.save(),
 ];
 
+var jobSoftwareDeveloper = new Job({
+  uuid: Utils.getUuid(),
+  timestamp: Utils.getTimestamp(),
+  name: "Software Developer",
+  status: "active",
+  profile: profilePradeepKumar.uuid
+});
+
+var jobs = [
+  jobSoftwareDeveloper.save(),
+];
+
+var jobApplicantJobSoftwareDeveloperApplicantSudeepKiran = new JobApplicant({
+  uuid: Utils.getUuid(),
+  timestamp: Utils.getTimestamp(),
+  applicants:[{
+    profile: profileSudeepKiran.uuid,
+    appliedOn : Utils.getTimestamp(),
+    resume : resumeSudeepKiran.uuid,
+  }],
+  job: jobSoftwareDeveloper.uuid,
+});
+
+var jobApplicants = [
+  jobApplicantJobSoftwareDeveloperApplicantSudeepKiran.save(),
+];
+
 // return mongodb connection string
 var getDbConnection = (env) => {
   if (!env || env === undefined)
@@ -403,7 +430,9 @@ var setupDB = (dbConnection) => {
       roles,
       profiles,
       feedbacks,
-      resumes
+      resumes,
+      jobs,
+      jobApplicants,
     ])
     .then(messages => {
       messages.forEach(m => {console.info('\nsaved %j', m);});
