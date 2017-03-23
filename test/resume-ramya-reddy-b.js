@@ -875,4 +875,4 @@ module.exports = {
 		"Summary" : "",
 		"FatherName" : ""
 	}
-}
+};

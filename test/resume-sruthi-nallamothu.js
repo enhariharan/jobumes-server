@@ -282,4 +282,4 @@ module.exports = {
 		"Summary" : "",
 		"FatherName" : "Srinivasarao N"
 	}
-}
+};
