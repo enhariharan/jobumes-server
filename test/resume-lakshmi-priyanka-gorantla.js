@@ -235,4 +235,4 @@ module.exports = {
 		"Summary" : "",
 		"FatherName" : "G.SRINIVASA RAO"
 	}
-}
+};

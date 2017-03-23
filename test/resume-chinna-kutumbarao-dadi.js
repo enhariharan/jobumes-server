@@ -318,4 +318,4 @@ module.exports = {
 		"Summary" : "",
 		"FatherName" : "Seetharamaiah Dadi"
 	}
-}
+};

@@ -2,16 +2,9 @@
  * This script is intended to be used by testers or for demo purposes.
  * This script cleans up the test database.  It removes all documents from all collections.
  */
-var app = require('express')();
 var mongoose = require('mongoose');
 
 const Config = require('../configuration').configuration;
-const Role = require('../lib/models/role-model').Role;
-const Profile = require('../lib/models/profile-model').Profile;
-const Feedback = require('../lib/models/employeefeedback-model').Feedback;
-const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
-const Resume = require('../lib/models/resume-model').Resume;
-const Job = require('../lib/models/job-model').Job;
 const opts = { server: { socketOptions: { keepAlive: 1 } } };
 
 var printHelp = () => {
@@ -39,10 +32,11 @@ var printHelp = () => {
   );
 };
 
+//jshint unused:false
 function _createPromises(args, conn) {
   return new Promise((resolve, reject) => {
     var promises = [];
-    if (args.length === 0) args.push('--all');
+    if (args.length === 0) { args.push('--all'); }
     args.forEach(arg => {
       switch (arg) {
         case '--roles':          promises.push(conn.model('Role').remove()); break;
@@ -58,6 +52,9 @@ function _createPromises(args, conn) {
           break;
         case '-h': // fall-through to --help
         case '--help': // fall-through to default
+          printHelp();
+          promises = null;
+          break;
         default:
           printHelp();
           promises = null;
@@ -66,13 +63,12 @@ function _createPromises(args, conn) {
     });
     resolve(promises);
   });
-};
+}
 
+//jshint unused:false
 function _createDbConnection(dbConnection) {
   return new Promise((resolve, reject) => {
-    var conn = (!dbConnection || dbConnection === undefined)
-    ? mongoose.createConnection(Config.mongo.development.connectionString, opts)
-    : dbConnection;
+    var conn = (!dbConnection || dbConnection === undefined) ? mongoose.createConnection(Config.mongo.development.connectionString, opts) : dbConnection;
 
     conn.on('connecting', () => {console.log('\nconnecting to DB');});
     conn.on('connected', () => {console.log('\nconnected to DB');});
@@ -105,12 +101,16 @@ var cleanupDB = (dbConnection) => {
     .then(promises => { return Promise.all(promises); })
     .then(entities => {
       entities.forEach(e => {console.log('Removed ' + JSON.stringify(e) + ' documents');});
-      if (!dbConn || dbConn === undefined) dbConn.close();
+      if (!dbConn || dbConn === undefined) {
+        dbConn.close();
+      }
       resolve(true);
     })
     .catch(err => {
       console.error('\nerror deleting all documents: ' + err.stack);
-      if (!dbConn || dbConn === undefined) dbConn.close();
+      if (!dbConn || dbConn === undefined) {
+        dbConn.close();
+      }
       reject(err);
     });
   });
@@ -118,7 +118,9 @@ var cleanupDB = (dbConnection) => {
 
 if (require.main === module) {
   cleanupDB()
-  .then(result => { process.exit(); })
-  .catch(err => { console.log('\nerror while clearing all recordS'); });
+  .then(result => { console.log('\nresult: ' + result); process.exit(); })
+  .catch(err => { console.log('\nerror while clearing all records: ' + err); });
 }
-else module.exports = {cleanupDB};
+else {
+  module.exports = {cleanupDB};
+}

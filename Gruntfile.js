@@ -5,8 +5,9 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     nodeunit: {
-      files: ['test/**/*_test.js'],
+      files: ['test/**/*-test.js'],
     },
+
     jshint: {
       options: {
         jshintrc: '.jshintrc'
@@ -21,6 +22,27 @@ module.exports = function(grunt) {
         src: ['test/**/*.js']
       },
     },
+
+    apidoc: {
+      myapp: {
+        src: "./lib/controllers",
+        dest: "./doc/apidoc/",
+        options : {
+          excludeFilters: [
+            "./lib/app/",
+            "./lib/models/",
+            "./lib/security/",
+            "./lib/services/",
+            "./lib/views/",
+            "node_modules/",
+            "temp/",
+            "test/",
+          ],
+          debug: true,
+        }
+      }
+    },
+
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -38,11 +60,13 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+  [
+    'grunt-contrib-nodeunit',
+    'grunt-contrib-jshint',
+    'grunt-contrib-watch',
+    'grunt-apidoc',
+  ].forEach(function(task) { grunt.loadNpmTasks(task); });
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit']);
-
+  grunt.registerTask('default', ['jshint', 'nodeunit', 'watch', 'apidoc']);
 };

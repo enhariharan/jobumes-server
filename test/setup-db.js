@@ -9,11 +9,7 @@ const Config = require('../configuration').configuration;
 const Role = require('../lib/models/role-model').Role;
 const Profile = require('../lib/models/profile-model').Profile;
 const Feedback = require('../lib/models/employeefeedback-model').Feedback;
-const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 const Resume = require('../lib/models/resume-model').Resume;
-const Job = require('../lib/models/job-model').Job;
-
-const opts = { server: { socketOptions: { keepAlive: 1 } } };
 
 var roleAdmin = new Role({
   uuid: Utils.getUuid(),
@@ -238,7 +234,7 @@ var resumeChandrapriyaValluri = new Resume({
   url: 'http://183.82.1.143:9058/jobumes/resumes/Arun.docx',
   name: 'Chandrapriya Valluri Resume 1',
   status: 'active',
-  parsedJson: require('./resume-chandrapriya-valluri'),
+  parsedJson: parsedResumeChandrapriyaValluri,
   profile: profileChandrapriyaValluri.uuid,
 });
 
@@ -365,7 +361,10 @@ var feedbacks = [
 // return mongodb connection string
 var getDbConnection = (env) => {
   if (!env || env === undefined)
+  {
     env = app.get('env');
+  }
+
 
   switch(env) {
     case 'development': return Config.mongo.development.connectionString;
@@ -375,10 +374,9 @@ var getDbConnection = (env) => {
   }
 };
 
+//jshint unused:false
 var setupDB = (dbConnection) => {
   return new Promise((resolve, reject) => {
-    var conn = null;
-
     mongoose.connect(getDbConnection());
     Promise.all([
       roles,
@@ -403,4 +401,6 @@ if (require.main === module) {
   .then(result => { console.info('result: ' + result); })
   .catch(err => { console.error('err: ' + err); });
 }
-else module.exports = {setupDB};
+else {
+  module.exports = {setupDB};
+}
