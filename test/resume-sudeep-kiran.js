@@ -266,4 +266,4 @@ module.exports = {
 		"Summary" : "",
 		"FatherName" : "KANTIPUDI VVS NARAYANA"
 	}
-}
+};
