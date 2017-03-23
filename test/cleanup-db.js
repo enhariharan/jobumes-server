@@ -12,6 +12,10 @@ const Feedback = require('../lib/models/employeefeedback-model').Feedback;
 const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 const Resume = require('../lib/models/resume-model').Resume;
 const Job = require('../lib/models/job-model').Job;
+const JobApplicant = require('../lib/models/job-applicants-model').JobApplicant;
+const IndustryType = require('../lib/models/industry-type-model').IndustryType;
+const FunctionalArea = require('../lib/models/functional-area-model').FunctionalArea;
+
 const opts = { server: { socketOptions: { keepAlive: 1 } } };
 
 var printHelp = () => {
