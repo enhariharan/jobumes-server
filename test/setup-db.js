@@ -8,7 +8,7 @@ const Utils = require('../lib//models/utilities');
 const Config = require('../configuration').configuration;
 const Role = require('../lib/models/role-model').Role;
 const Profile = require('../lib/models/profile-model').Profile;
-const Feedback = require('../lib/models/employeefeedback-model').Feedback;
+const Feedback = require('../lib/models/feedback-model').Feedback;
 const Resume = require('../lib/models/resume-model').Resume;
 
 var roleAdmin = new Role({
