@@ -1,6 +1,10 @@
 var configuration = {
   server: {
+    // port that this sever will listen on
     port: 9060,
+    // folder to store uploaded resumes, jobs, images, videos, ...
+    // This is optional. If not provided then uploaded will be stored in <project-root>/tmp/redgummi-uploads/
+    uploadsFolder: '/tmp/redgummi-uploads',
   },
   mongo: {
     development: {connectionString: 'mongodb://localhost/jobumes-development',},
