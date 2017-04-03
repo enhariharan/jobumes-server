@@ -229,16 +229,16 @@ var profiles = [
   profilePradeepKumar.save()
 ];
 
-const parsedResumeBidrohaKumarParija = require('./resume-bidroha-kumar-parija');
-const parsedResumeChandrapriyaValluri = require('./resume-chandrapriya-valluri');
-const parsedResumeChinnaKutumbaRaoDadi = require('./resume-chinna-kutumbarao-dadi');
-const parsedResumeLakshmiPriyankaGorantla = require('./resume-lakshmi-priyanka-gorantla');
-const parsedResumeRamyaReddyB = require('./resume-ramya-reddy-b');
-const parsedResumeSatyanarayanaReddyK = require('./resume-satyanarayana-reddy-k');
-const parsedResumeSruthiNallamothu = require('./resume-sruthi-nallamothu');
-const parsedResumeSudeepKiran = require('./resume-sudeep-kiran');
-const parsedResumeVijayaSyamKumarDamaraju = require('./resume-vijaya-syam-kumar-damaraju');
-const parsedResumeVinodKumarRayana = require('./resume-vinod-kumar-rayana');
+const parsedResumeBidrohaKumarParija = require('./resources/resume-bidroha-kumar-parija');
+const parsedResumeChandrapriyaValluri = require('./resources/resume-chandrapriya-valluri');
+const parsedResumeChinnaKutumbaRaoDadi = require('./resources/resume-chinna-kutumbarao-dadi');
+const parsedResumeLakshmiPriyankaGorantla = require('./resources/resume-lakshmi-priyanka-gorantla');
+const parsedResumeRamyaReddyB = require('./resources/resume-ramya-reddy-b');
+const parsedResumeSatyanarayanaReddyK = require('./resources/resume-satyanarayana-reddy-k');
+const parsedResumeSruthiNallamothu = require('./resources/resume-sruthi-nallamothu');
+const parsedResumeSudeepKiran = require('./resources/resume-sudeep-kiran');
+const parsedResumeVijayaSyamKumarDamaraju = require('./resources/resume-vijaya-syam-kumar-damaraju');
+const parsedResumeVinodKumarRayana = require('./resources/resume-vinod-kumar-rayana');
 
 var resumeBidrohaKumarParija = new Resume({
   uuid: Utils.getUuid(),
