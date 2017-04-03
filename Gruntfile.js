@@ -61,12 +61,11 @@ module.exports = function(grunt) {
 
   // These plugins provide necessary tasks.
   [
-    'grunt-contrib-nodeunit',
     'grunt-contrib-jshint',
     'grunt-contrib-watch',
     'grunt-apidoc',
   ].forEach(function(task) { grunt.loadNpmTasks(task); });
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit', 'watch', 'apidoc']);
+  grunt.registerTask('default', ['jshint', 'watch', 'apidoc']);
 };
