@@ -10,6 +10,12 @@ const Role = require('../lib/models/role-model').Role;
 const Profile = require('../lib/models/profile-model').Profile;
 const Feedback = require('../lib/models/feedback-model').Feedback;
 const Resume = require('../lib/models/resume-model').Resume;
+const Job = require('../lib/models/job-model').Job;
+const JobApplicant = require('../lib/models/job-applicants-model').JobApplicant;
+const IndustryType = require('../lib/models/industry-type-model').IndustryType;
+const FunctionalArea = require('../lib/models/functional-area-model').FunctionalArea;
+const Video = require('../lib/models/video-model').Video;
+const opts = { server: { socketOptions: { keepAlive: 1 } } };
 
 var roleAdmin = new Role({
   uuid: Utils.getUuid(),
@@ -193,6 +199,21 @@ var profileVinodKumarRayana = new Profile({
   phoneNumber: '+911234567890',
 });
 
+var profilePradeepKumar = new Profile({
+  uuid: Utils.getUuid(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleRecruiter.uuid,
+  login: { username: 'pradeep.ragiphani007@gmail.com', password: 'password', },
+  firstName: 'Pradeep',
+  lastName: 'Ragiphani',
+  middleName: 'Kumar',
+  gender: 'male',
+  email: 'pradeep.ragiphani007@gmail.com',
+  phoneNumber: '+918686549997',
+});
+
 var profiles = [
   profileAdmin.save(),
   profileBidrohaKumarParija.save(),
@@ -205,6 +226,7 @@ var profiles = [
   profileSudeepKiran.save(),
   profileVijayaSyamKumarDamaraju.save(),
   profileVinodKumarRayana.save(),
+  profilePradeepKumar.save()
 ];
 
 const parsedResumeBidrohaKumarParija = require('./resume-bidroha-kumar-parija');
@@ -358,6 +380,33 @@ var feedbacks = [
   feedback2.save(),
 ];
 
+var jobSoftwareDeveloper = new Job({
+  uuid: Utils.getUuid(),
+  timestamp: Utils.getTimestamp(),
+  name: "Software Developer",
+  status: "active",
+  profile: profilePradeepKumar.uuid
+});
+
+var jobs = [
+  jobSoftwareDeveloper.save(),
+];
+
+var jobApplicantJobSoftwareDeveloperApplicantSudeepKiran = new JobApplicant({
+  uuid: Utils.getUuid(),
+  timestamp: Utils.getTimestamp(),
+  applicants:[{
+    profile: profileSudeepKiran.uuid,
+    appliedOn : Utils.getTimestamp(),
+    resume : resumeSudeepKiran.uuid,
+  }],
+  job: jobSoftwareDeveloper.uuid,
+});
+
+var jobApplicants = [
+  jobApplicantJobSoftwareDeveloperApplicantSudeepKiran.save(),
+];
+
 // return mongodb connection string
 var getDbConnection = (env) => {
   if (!env || env === undefined)
@@ -382,7 +431,9 @@ var setupDB = (dbConnection) => {
       roles,
       profiles,
       feedbacks,
-      resumes
+      resumes,
+      jobs,
+      jobApplicants,
     ])
     .then(messages => {
       messages.forEach(m => {console.info('\nsaved %j', m);});
