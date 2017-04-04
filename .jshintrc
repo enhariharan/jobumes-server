@@ -17,5 +17,6 @@
     "describe": false,
     "it": false,
     "before": false,
+    "beforeEach": false
   }
 }
