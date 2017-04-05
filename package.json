@@ -35,8 +35,9 @@
     "grunt-contrib-jshint": "~1.1.0",
     "grunt-contrib-nodeunit": "~1.0.0",
     "grunt-contrib-watch": "~1.0.0",
+    "grunt-env": "^0.4.4",
     "grunt-mocha-test": "^0.13.2",
-    "mocha": "^3.2.0",
+    "mocha": "^3.2.0"
   },
   "keywords": [],
   "dependencies": {
