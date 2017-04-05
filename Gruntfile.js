@@ -95,6 +95,6 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('dev', ['env:dev', 'watch', 'jshint', 'mochaTest', 'apidoc']);
-  // grunt.registerTask('build', ['env:build', 'watch', 'jshint', 'mochaTest', 'apidoc']);
+  grunt.registerTask('build', ['env:build', 'watch', 'jshint', 'mochaTest', 'apidoc']);
   grunt.registerTask('default', ['watch', 'jshint', 'mochaTest', 'apidoc']);
 };
