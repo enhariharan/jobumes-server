@@ -66,10 +66,27 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    env: {
+      options: {
+        // shared options go here
+        replace: {
+          NODE_ENV: 'test'
+        }
+      },
+      dev: {
+        NODE_ENV: 'test'
+      },
+      build: {
+        NODE_ENV: 'production'
+      }
+    }
+
   });
 
   // These plugins provide necessary tasks.
   [
+    'grunt-env',
     'grunt-contrib-watch',
     'grunt-contrib-jshint',
     'grunt-mocha-test',
@@ -77,5 +94,7 @@ module.exports = function(grunt) {
   ].forEach(function(task) { grunt.loadNpmTasks(task); });
 
   // Default task.
+  grunt.registerTask('dev', ['env:dev', 'watch', 'jshint', 'mochaTest', 'apidoc']);
+  // grunt.registerTask('build', ['env:build', 'watch', 'jshint', 'mochaTest', 'apidoc']);
   grunt.registerTask('default', ['watch', 'jshint', 'mochaTest', 'apidoc']);
 };
