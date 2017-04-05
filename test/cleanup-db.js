@@ -17,6 +17,7 @@ const FunctionalArea = require('../lib/models/functional-area-model').Functional
 const Video = require('../lib/models/video-model').Video;
 
 const opts = { server: { socketOptions: { keepAlive: 1 } } };
+var args = null;
 
 var printHelp = () => {
   console.log(
@@ -85,7 +86,9 @@ function _createPromises(args, conn) {
 //jshint unused:false
 function _createDbConnection(dbConnection) {
   return new Promise((resolve, reject) => {
-    var conn = (!dbConnection || dbConnection === undefined) ? mongoose.createConnection(Config.mongo.development.connectionString, opts) : dbConnection;
+    console.info('dbConnection: '+dbConnection);
+    var conn = (!dbConnection || dbConnection === undefined) ? mongoose.createConnection(Config.mongo.development.connectionString, opts) :
+    dbConnection;
 
     conn.on('connecting', () => {console.log('\nconnecting to DB');});
     conn.on('connected', () => {console.log('\nconnected to DB');});
@@ -100,15 +103,8 @@ function _createDbConnection(dbConnection) {
   });
 }
 
-var cleanupDB = (dbConnection) => {
+var cleanupDB = (dbConnection, args) => {
   return new Promise((resolve, reject) => {
-    var args = process.argv.slice(2);
-
-    if (args[0] === '-h' || args[0] === '--help') {
-      printHelp();
-      process.exit();
-    }
-
     var dbConn = null;
     _createDbConnection(dbConnection)
     .then(conn => {
@@ -118,23 +114,26 @@ var cleanupDB = (dbConnection) => {
     .then(promises => { return Promise.all(promises); })
     .then(entities => {
       entities.forEach(e => {console.log('Removed ' + JSON.stringify(e) + ' documents');});
-      if (!dbConn || dbConn === undefined) {
-        dbConn.close();
-      }
-      resolve(true);
+      return dbConn.close();
     })
+    .then(() => { resolve(true); })
     .catch(err => {
       console.error('\nerror deleting all documents: ' + err.stack);
-      if (!dbConn || dbConn === undefined) {
-        dbConn.close();
-      }
+      dbConn.close();
       reject(err);
     });
   });
 };
 
 if (require.main === module) {
-  cleanupDB()
+  args = process.argv.slice(2);
+
+  if (args[0] === '-h' || args[0] === '--help') {
+    printHelp();
+    process.exit();
+  }
+
+  cleanupDB(null, args)
   .then(result => { console.log('\nresult: ' + result); process.exit(); })
   .catch(err => { console.log('\nerror while clearing all records: ' + err); });
 }

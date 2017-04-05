@@ -26,14 +26,18 @@
   },
   "scripts": {
     "start": "node lib/app/jobumes-server.js",
-    "test": "grunt nodeunit"
+    "test": "NODE_ENV=test mocha"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "grunt": "~1.0.1",
     "grunt-apidoc": "^0.11.0",
     "grunt-contrib-jshint": "~1.1.0",
     "grunt-contrib-nodeunit": "~1.0.0",
-    "grunt-contrib-watch": "~1.0.0"
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-env": "^0.4.4",
+    "grunt-mocha-test": "^0.13.2",
+    "mocha": "^3.2.0"
   },
   "keywords": [],
   "dependencies": {
