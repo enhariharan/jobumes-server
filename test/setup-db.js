@@ -409,11 +409,7 @@ var jobApplicants = [
 
 // return mongodb connection string
 var getDbConnection = (env) => {
-  if (!env || env === undefined)
-  {
-    env = app.get('env');
-  }
-
+  if (!env || env === undefined) { env = app.get('env'); }
 
   switch(env) {
     case 'development': return Config.mongo.development.connectionString;
@@ -426,7 +422,11 @@ var getDbConnection = (env) => {
 //jshint unused:false
 var setupDB = (dbConnection) => {
   return new Promise((resolve, reject) => {
-    mongoose.connect(getDbConnection());
+    var dbConnectionMustBeClosedOnExit = false;
+    if (!dbConnection || dbConnection === undefined) {
+      mongoose.connect(getDbConnection(app.get('env')));
+      dbConnectionMustBeClosedOnExit = true; // DB connection must not be closed if sent by a calling method
+    }
     Promise.all([
       roles,
       profiles,
@@ -437,11 +437,11 @@ var setupDB = (dbConnection) => {
     ])
     .then(messages => {
       messages.forEach(m => {console.info('\nsaved %j', m);});
-      mongoose.disconnect();
+      if (dbConnectionMustBeClosedOnExit) { mongoose.disconnect(); }
       resolve(true);
     })
     .catch(err => {
-      mongoose.disconnect();
+      if (dbConnectionMustBeClosedOnExit) { mongoose.disconnect(); }
       reject(err);
     });
   });

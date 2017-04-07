@@ -4,8 +4,19 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    nodeunit: {
-      files: ['test/**/*-test.js'],
+    watch: {
+      gruntfile: {
+        files: '<%= jshint.gruntfile.src %>',
+        tasks: ['jshint:gruntfile']
+      },
+      lib: {
+        files: '<%= jshint.lib.src %>',
+        tasks: ['jshint:lib', 'mochaTest']
+      },
+      test: {
+        files: '<%= jshint.test.src %>',
+        tasks: ['jshint:test', 'mochaTest']
+      },
     },
 
     jshint: {
@@ -21,6 +32,19 @@ module.exports = function(grunt) {
       test: {
         src: ['test/**/*.js']
       },
+    },
+
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+          captureFile: 'results.txt', // capture reporter output to file
+          quiet: false, // test output will be sent to stdout
+          clearRequireCache: false, // do not clear the require cache before running tests
+          noFail: false // Set to fail on failed tests (will still fail on other errors)
+        },
+        src: ['test/**/*.js']
+      }
     },
 
     apidoc: {
@@ -43,30 +67,34 @@ module.exports = function(grunt) {
       }
     },
 
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
+    env: {
+      options: {
+        // shared options go here
+        replace: {
+          NODE_ENV: 'test'
+        }
       },
-      lib: {
-        files: '<%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'nodeunit']
+      dev: {
+        NODE_ENV: 'test'
       },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'nodeunit']
-      },
-    },
+      build: {
+        NODE_ENV: 'production'
+      }
+    }
+
   });
 
   // These plugins provide necessary tasks.
   [
-    'grunt-contrib-nodeunit',
-    'grunt-contrib-jshint',
+    'grunt-env',
     'grunt-contrib-watch',
+    'grunt-contrib-jshint',
+    'grunt-mocha-test',
     'grunt-apidoc',
   ].forEach(function(task) { grunt.loadNpmTasks(task); });
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit', 'watch', 'apidoc']);
+  grunt.registerTask('dev', ['env:dev', 'watch', 'jshint', 'mochaTest', 'apidoc']);
+  grunt.registerTask('build', ['env:build', 'watch', 'jshint', 'mochaTest', 'apidoc']);
+  grunt.registerTask('default', ['watch', 'jshint', 'mochaTest', 'apidoc']);
 };
