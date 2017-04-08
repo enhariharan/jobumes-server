@@ -11,7 +11,7 @@ const Feedback = require('../lib/models/feedback-model').Feedback;
 const SocialProfile = require('../lib/models/socialprofile-model').SocialProfile;
 const Resume = require('../lib/models/resume-model').Resume;
 const Job = require('../lib/models/job-model').Job;
-const JobApplicant = require('../lib/models/job-profile-model').JobApplicant;
+const JobProfile = require('../lib/models/job-profile-model').JobProfile;
 const IndustryType = require('../lib/models/industry-type-model').IndustryType;
 const FunctionalArea = require('../lib/models/functional-area-model').FunctionalArea;
 const Video = require('../lib/models/video-model').Video;
@@ -31,7 +31,7 @@ var printHelp = () => {
     '--resumes: Removes all resumes in resumes collection.\n' +
     '--feedbacks: Removes all feedbacks in feedcbacks collection.\n' +
     '--jobs: Removes all jobs in jobs collection.\n' +
-    '--jobsApplicants: Removes all jobs in jobApplicant collection.\n' +
+    '--JobProfiles: Removes all jobs in JobProfile collection.\n' +
     '\n[EXAMPLE USAGE] \n' +
     '1. node cleanup-data.js --all \n' +
     'Removes all documents from all collections. \n' +
@@ -58,7 +58,7 @@ function _createPromises(args, conn) {
         case '--resumes':       promises.push(conn.model('Resume').remove()); break;
         case '--feedbacks':       promises.push(conn.model('Feedback').remove()); break;
         case '--jobs':       promises.push(conn.model('Job').remove()); break;
-        case '--jobsApplicants':       promises.push(conn.model('JobApplicant').remove()); break;
+        case '--jobProfiles':       promises.push(conn.model('JobProfile').remove()); break;
         case '-a': // fall-through to --all
         case '--all':
           promises.push(conn.model('Role').remove());
@@ -66,7 +66,7 @@ function _createPromises(args, conn) {
           promises.push(conn.model('Resume').remove());
           promises.push(conn.model('Feedback').remove());
           promises.push(conn.model('Job').remove());
-          promises.push(conn.model('JobApplicant').remove());
+          promises.push(conn.model('JobProfile').remove());
           break;
         case '-h': // fall-through to --help
         case '--help': // fall-through to default
