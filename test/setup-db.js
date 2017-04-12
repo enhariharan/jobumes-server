@@ -11,7 +11,7 @@ const Profile = require('../lib/models/profile-model').Profile;
 const Feedback = require('../lib/models/feedback-model').Feedback;
 const Resume = require('../lib/models/resume-model').Resume;
 const Job = require('../lib/models/job-model').Job;
-const JobApplicant = require('../lib/models/job-applicants-model').JobApplicant;
+const JobProfile = require('../lib/models/job-profile-model').JobProfile;
 const IndustryType = require('../lib/models/industry-type-model').IndustryType;
 const FunctionalArea = require('../lib/models/functional-area-model').FunctionalArea;
 const Video = require('../lib/models/video-model').Video;
@@ -392,7 +392,7 @@ var jobs = [
   jobSoftwareDeveloper.save(),
 ];
 
-var jobApplicantJobSoftwareDeveloperApplicantSudeepKiran = new JobApplicant({
+var JobProfileJobSoftwareDeveloperApplicantSudeepKiran = new JobProfile({
   uuid: Utils.getUuid(),
   timestamp: Utils.getTimestamp(),
   applicants:[{
@@ -403,8 +403,8 @@ var jobApplicantJobSoftwareDeveloperApplicantSudeepKiran = new JobApplicant({
   job: jobSoftwareDeveloper.uuid,
 });
 
-var jobApplicants = [
-  jobApplicantJobSoftwareDeveloperApplicantSudeepKiran.save(),
+var JobProfiles = [
+  JobProfileJobSoftwareDeveloperApplicantSudeepKiran.save(),
 ];
 
 // return mongodb connection string
@@ -433,7 +433,7 @@ var setupDB = (dbConnection) => {
       feedbacks,
       resumes,
       jobs,
-      jobApplicants,
+      JobProfiles,
     ])
     .then(messages => {
       messages.forEach(m => {console.info('\nsaved %j', m);});
