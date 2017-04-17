@@ -38,7 +38,7 @@ var roles = [
   roleJobSeeker.save(),
 ];
 
-var profileAdmin = new Profile({
+var profileSurya = new Profile({
   uuid: Utils.getUuid(),
   created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
   lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
@@ -49,6 +49,20 @@ var profileAdmin = new Profile({
   lastName: 'Vempati',
   gender: 'male',
   email: 'surya@snigdha.co.in',
+  phoneNumber: '+911234567890',
+});
+
+var profileAdmin = new Profile({
+  uuid: Utils.getUuid(),
+  created: { timestamp: Utils.getTimestamp(), by: this.uuid, },
+  lastModified: [{ timestamp: Utils.getTimestamp(), by: this.uuid, },],
+  status: 'registered',
+  role: roleAdmin.uuid,
+  login: { username: 'admin@rg.com', password: 'password', },
+  firstName: 'Admin',
+  lastName: 'Red Gummi',
+  gender: '',
+  email: 'admin@rg.com',
   phoneNumber: '+911234567890',
 });
 
