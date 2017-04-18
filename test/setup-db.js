@@ -32,10 +32,16 @@ var roleJobSeeker = new Role({
   timestamp: Utils.getTimestamp(),
   name: 'jobseeker',
 });
+var roleRecruiterAdmin = new Role({
+  uuid: Utils.getUuid(),
+  timestamp: Utils.getTimestamp(),
+  name: 'recruiterAdmin',
+});
 var roles = [
   roleRecruiter.save(),
   roleAdmin.save(),
   roleJobSeeker.save(),
+  roleRecruiterAdmin.save()
 ];
 
 var profileSurya = new Profile({
