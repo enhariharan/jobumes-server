@@ -15,6 +15,7 @@ const JobProfile = require('../lib/models/job-profile-model').JobProfile;
 const IndustryType = require('../lib/models/industry-type-model').IndustryType;
 const FunctionalArea = require('../lib/models/functional-area-model').FunctionalArea;
 const Video = require('../lib/models/video-model').Video;
+const Favourite = require('../models/favourite-model').Favourite;
 
 const opts = { server: { socketOptions: { keepAlive: 1 } } };
 var args = null;
