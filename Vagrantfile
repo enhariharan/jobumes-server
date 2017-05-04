@@ -75,6 +75,19 @@ Vagrant.configure("2") do |config|
     cd /vagrant && npm install && npm start
 
     # git clone git@github.com:enhariharan/jobumes-server.git
-
   SHELL
+
+
+
+  config.vm.provider :aws do |aws, override|
+  aws.access_key_id = "AAAAIIIIYYYY4444AAAA”
+  aws.secret_access_key = "c344441LooLLU322223526IabcdeQL12E34At3mm”
+  aws.keypair_name = "iheavy"
+
+  aws.ami = "ami-7747d01e"
+
+  override.ssh.username = "ubuntu"
+  override.ssh.private_key_path = "/var/root/iheavy_aws/pk-XHHHHHMMMAABPEDEFGHOAOJH1QBH5324.pem"
+  end
+
 end
