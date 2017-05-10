@@ -269,6 +269,7 @@ var resumeBidrohaKumarParija = new Resume({
   name: 'Bidroha Kumar Parija Resume 1',
   status: 'active',
   parsedJson: parsedResumeBidrohaKumarParija,
+  updateParsedJson : parsedResumeBidrohaKumarParija,
   profile: profileBidrohaKumarParija.uuid,
 });
 
@@ -279,6 +280,7 @@ var resumeChandrapriyaValluri = new Resume({
   name: 'Chandrapriya Valluri Resume 1',
   status: 'active',
   parsedJson: parsedResumeChandrapriyaValluri,
+  updateParsedJson: parsedResumeChandrapriyaValluri,
   profile: profileChandrapriyaValluri.uuid,
 });
 
@@ -289,6 +291,7 @@ var resumeChinnaKutumbaRaoDadi = new Resume({
   name: 'Chinna Kutumba Rao Dadi Resume 1',
   status: 'active',
   parsedJson: parsedResumeChinnaKutumbaRaoDadi,
+  updateParsedJson: parsedResumeChinnaKutumbaRaoDadi,
   profile: profileChinnaKutumbaRaoDadi.uuid,
 });
 
@@ -299,6 +302,7 @@ var resumeLakshmiPriyankaGorantla = new Resume({
   name: 'Lakshmi Priyanka Gorantla Resume 1',
   status: 'active',
   parsedJson: parsedResumeLakshmiPriyankaGorantla,
+  updateParsedJson: parsedResumeLakshmiPriyankaGorantla,
   profile: profileLakshmiPriyankaGorantla.uuid,
 });
 
@@ -309,6 +313,7 @@ var resumeRamyaReddyB = new Resume({
   name: 'Ramya Reddy B Resume 1',
   status: 'active',
   parsedJson: parsedResumeRamyaReddyB,
+  updateParsedJson: parsedResumeRamyaReddyB,
   profile: profileRamyaReddyB.uuid,
 });
 
@@ -319,6 +324,7 @@ var resumeSatyanarayanaReddyK = new Resume({
   name: 'Satyanarayana Reddy K Resume 1',
   status: 'active',
   parsedJson: parsedResumeSatyanarayanaReddyK,
+  updateParsedJson: parsedResumeSatyanarayanaReddyK,
   profile: profileSatyanarayanaReddyK.uuid,
 });
 
@@ -329,6 +335,7 @@ var resumeSruthiNallamothu = new Resume({
   name: 'Sruthi Nallamothu Resume 1',
   status: 'active',
   parsedJson: parsedResumeSruthiNallamothu,
+  updateParsedJson: parsedResumeSruthiNallamothu,
   profile: profileSruthiNallamothu.uuid,
 });
 
@@ -339,6 +346,7 @@ var resumeSudeepKiran = new Resume({
   name: 'Sudeep Kiran Resume 1',
   status: 'active',
   parsedJson: parsedResumeSudeepKiran,
+  updateParsedJson: parsedResumeSudeepKiran,
   profile: profileSudeepKiran.uuid,
 });
 
@@ -349,6 +357,7 @@ var resumeVijayaSyamKumarDamaraju = new Resume({
   name: 'Vijaya Syam Kumar Damaraju Resume 1',
   status: 'active',
   parsedJson: parsedResumeVijayaSyamKumarDamaraju,
+  updateParsedJson: parsedResumeVijayaSyamKumarDamaraju,
   profile: profileVijayaSyamKumarDamaraju.uuid,
 });
 
@@ -359,6 +368,7 @@ var resumeVinodKumarRayana = new Resume({
   name: 'Vinod Kumar Rayana Resume 1',
   status: 'active',
   parsedJson: parsedResumeVinodKumarRayana,
+  updateParsedJson: parsedResumeVinodKumarRayana,
   profile: profileVinodKumarRayana.uuid,
 });
 
