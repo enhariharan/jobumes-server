@@ -1,4 +1,4 @@
-# jobumes-server
+# red-gummi-server
 
 This is the backend server for the Red Gummi service
 
@@ -22,24 +22,32 @@ Once the .deb file is downloaded it can be installed with the dpkg command
 
 $ sudo dpkg -i vagrant_1.9.3_x86_64.deb
 
-### 4. Bring up the VM
-In a terminal, go into the project home folder and use Vagrant to bring up the VM
-
-$ vagrant up --provider=virtualbox
-
-This will take some time to setup the VM in your laptop
-
-### 5. SSH into the VM
-Once setup is complete you can use Vagrant to SSH into the VM, like below.
-
-$ vagrant ssh
-
-
-## Deployment Instructions for production stage - (AWS)
-To deploy to AWS EC2 instance, we will use the vagrant-aws plugin. Install it like so:
+### 3. Install Vagrant plugin for AWS
+The Vagrant plugin for AWS is called vagrant-aws. The source code for this plugin can be found at https://github.com/mitchellh/vagrant-aws. This plugin is needed to deploy the production instance of red-gummi-server on AWS. The plugin can be installed by running the following command.
 
 $ vagrant plugin install vagrant-aws
 
+### 4. Bring up the VM in localhost instance
+The VM for running a local instance on your machine is called "local". In a terminal, go into the project home folder and use Vagrant to bring up the VM
+
+$ vagrant up local
+
+This will take some time to setup the VM in your laptop. Then, execute the following command to provision.
+
+$ vagrant provision local
+
+The red-gummi-server will automatically come up at the execution of this script.
+
+## 6. Deployment Instructions for production stage - (AWS)
+The VM for running red-gummi-server an AWS instance is called "prod". In a terminal, go into the project home folder and use Vagrant to bring up the VM.
+
+$ vagrant up prod
+
+This will take some time to setup the VM. Then, execute the following command to provision.
+
+$ vagrant provision prod
+
+The red-gummi-server will automatically come up at the execution of this script.
+
 ## License
 Licensed under the private license.
-  

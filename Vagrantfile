@@ -1,97 +1,91 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# Vagrant.require_plugin 'vagrant-aws'
+
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-  # The most common configuration options are documented and commented below.
-  # For a complete reference, please see the online documentation at
-  # https://docs.vagrantup.com.
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "base"
-  config.vm.box = "ubuntu/trusty64"
+  # This below config, called 'local' defines a virtual machine to be run on the developer's machine.
+  config.vm.define 'local' do |local|
+    # Assign a base Ubuntu image to the VM
+    local.vm.box = "ubuntu/trusty64"
 
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+    # Assign a default host name to the VM
+    local.vm.hostname = "jobumes-server-local"
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 9060, host: 9060
+    # Jobumes server will run on port 9060 in the VM, forward all requests to port 9060 on the host.
+    local.vm.network "forwarded_port", guest: 9060, host: 9060
 
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
+    # Now provision the VM using BAS Shell commands
+    local.vm.provision "shell", inline: <<-SHELL
+      # update APT cache and install dependencies - vim & nano editors, python, wget downloader, & mongodb
+      sudo apt-get update
+      sudo apt-get install -y vim nano python3 wget mongodb
 
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
+      # install and setup node.js v7
+      wget https://nodejs.org/dist/v7.10.0/node-v7.10.0-linux-x64.tar.xz
+      tar xvf node-v7.10.0-linux-x64.tar.xz
+      sudo mv node-v7.10.0-linux-x64 /usr/bin/
+      sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/node /usr/bin/node
+      sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/npm /usr/bin/npm
 
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
+      # install npm dependencies for jobumes-server and start the server
+      # NOTE: jobumes-server will be in the VM at /vargant by default. We keep it at default.
+      cd /vagrant && npm install && npm start
+    SHELL
+  end
+  # End of VM configuration for 'local'
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
+  # This below config, called 'prod' defines an instance to be deployed in production.
+  # As can be seen from the code The 'prod' instance is now configured to run on AWS.
+  config.vm.define 'prod' do |prod|
+    prod.vm.box = 'dummy' # DO NO CHANGE THIS
+    prod.vm.box_url = 'https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box' # DO NO CHANGE THIS
+    prod.vm.provider :aws do |aws, override|
+      # This is the access key id configured in the AWS instance.
+      aws.access_key_id = 'AKIAJOQXK2DSBHA7IFQQ'
 
-  # Define a Vagrant Push strategy for pushing to Atlas. Other push strategies
-  # such as FTP and Heroku are also available. See the documentation at
-  # https://docs.vagrantup.com/v2/push/atlas.html for more information.
-  # config.push.define "atlas" do |push|
-  #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
-  # end
+      # This is the secret key configured in the AWS instance.
+      aws.secret_access_key = 'GvZy7mWgU1Z41EE6PihbRCthmHZNpqUHjePj1Nmo'
 
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    # update APT cache and install dependencies - vim & nano editors, python, wget downloader, & mongodb
-    sudo apt-get update
-    sudo apt-get install -y vim nano python3 wget mongodb
+      # This is the file name of the private key-pair. Also refer to the "override.ssh.private_key_path" setting below.
+      aws.keypair_name = 'immac'
 
-    # install node.js v7
-    wget https://nodejs.org/dist/v7.10.0/node-v7.10.0-linux-x64.tar.xz
-    tar xvf node-v7.10.0-linux-x64.tar.xz
-    sudo mv node-v7.10.0-linux-x64 /usr/bin/
-    sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/node /usr/bin/node
-    sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/npm /usr/bin/npm
+      # This is the AMI image name of the AWS's Ubuntu instance
+      aws.ami = 'ami-cdbdd7a2'
 
-    # install npm dependencies for jobumes-server and start the server
-    cd /vagrant && npm install && npm start
-  SHELL
+      # This is the username used in the AWS's Ubuntu instance
+      override.ssh.username = "ubuntu"
 
+      # The below line configures the private key for the AWS instance.
+      # TODO: Please do ensure that this line is changed as needed to provide the correct path
+      # and correct filename of the private key pair stored in your machine.
+      # NOTE: THESE private key files (.pem) will not be committed into Git. You need to
+      # get the correct keys yourself and provide the path below.
+      override.ssh.private_key_path = "/home/hariharan/work/repos/jobumes-server/immac.pem"
+    end
 
+    prod.vm.provision "shell", inline: <<-SHELL
+      # update APT cache and install dependencies - vim & nano editors, python, wget downloader, & mongodb
+      sudo apt-get update
+      sudo apt-get install -y vim nano python3 wget mongodb
 
-  # config.vm.provider :aws do |aws, override|
-  #   aws.access_key_id = "AAAAIIIIYYYY4444AAAA”
-  #   aws.secret_access_key = "c344441LooLLU322223526IabcdeQL12E34At3mm”
-  #   aws.keypair_name = "iheavy"
-  #
-  #   aws.ami = "ami-7747d01e"
-  #
-  #   override.ssh.username = "ubuntu"
-  #   override.ssh.private_key_path = "/var/root/iheavy_aws/pk-XHHHHHMMMAABPEDEFGHOAOJH1QBH5324.pem"
-  # end
+      # install node.js v7
+      wget https://nodejs.org/dist/v7.10.0/node-v7.10.0-linux-x64.tar.xz
+      tar xvf node-v7.10.0-linux-x64.tar.xz
+      sudo mv node-v7.10.0-linux-x64 /usr/bin/
+      sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/node /usr/bin/node
+      sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/npm /usr/bin/npm
 
+      # install npm dependencies for jobumes-server and start the server
+      cd /vagrant && npm install && npm start
+    SHELL
+
+  end
+  # End of VM configuration for 'prod'
 end
+# End of Vagrantfile
