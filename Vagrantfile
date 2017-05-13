@@ -66,28 +66,32 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-    apt-get update
-    apt-get install -y curl vim python3
+    # update APT cache and install dependencies - vim & nano editors, python, wget downloader, & mongodb
+    sudo apt-get update
+    sudo apt-get install -y vim nano python3 wget mongodb
 
-    sudo curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
-    sudo apt-get install -y nodejs
+    # install node.js v7
+    wget https://nodejs.org/dist/v7.10.0/node-v7.10.0-linux-x64.tar.xz
+    tar xvf node-v7.10.0-linux-x64.tar.xz
+    sudo mv node-v7.10.0-linux-x64 /usr/bin/
+    sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/node /usr/bin/node
+    sudo ln --symbolic /usr/bin/node-v7.10.0-linux-x64/bin/npm /usr/bin/npm
 
+    # install npm dependencies for jobumes-server and start the server
     cd /vagrant && npm install && npm start
-
-    # git clone git@github.com:enhariharan/jobumes-server.git
   SHELL
 
 
 
-  config.vm.provider :aws do |aws, override|
-  aws.access_key_id = "AAAAIIIIYYYY4444AAAA”
-  aws.secret_access_key = "c344441LooLLU322223526IabcdeQL12E34At3mm”
-  aws.keypair_name = "iheavy"
-
-  aws.ami = "ami-7747d01e"
-
-  override.ssh.username = "ubuntu"
-  override.ssh.private_key_path = "/var/root/iheavy_aws/pk-XHHHHHMMMAABPEDEFGHOAOJH1QBH5324.pem"
-  end
+  # config.vm.provider :aws do |aws, override|
+  #   aws.access_key_id = "AAAAIIIIYYYY4444AAAA”
+  #   aws.secret_access_key = "c344441LooLLU322223526IabcdeQL12E34At3mm”
+  #   aws.keypair_name = "iheavy"
+  #
+  #   aws.ami = "ami-7747d01e"
+  #
+  #   override.ssh.username = "ubuntu"
+  #   override.ssh.private_key_path = "/var/root/iheavy_aws/pk-XHHHHHMMMAABPEDEFGHOAOJH1QBH5324.pem"
+  # end
 
 end
