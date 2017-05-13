@@ -58,6 +58,9 @@ Vagrant.configure("2") do |config|
       # This is the AMI image name of the AWS's Ubuntu instance
       aws.ami = 'ami-cdbdd7a2'
 
+      # This is the AMI image name of the AWS's Ubuntu instance
+      aws.region = 'ap-south-1'
+
       # This is the username used in the AWS's Ubuntu instance
       override.ssh.username = "ubuntu"
 
