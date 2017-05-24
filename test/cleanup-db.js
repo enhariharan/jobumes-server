@@ -23,6 +23,7 @@ const Organization = require('../models/organization-model').Organization;
 const Favourite = require('../models/favourite-model').Favourite;
 const CreateAlert = require('../models/create-alert-model').CreateAlert;
 const PaymentType = require('../models/payment-type-model').PaymentType;
+const AdminUpload = require('../models/admin-upload-model').AdminUpload;
 
 const opts = { server: { socketOptions: { keepAlive: 1 } } };
 var args = null;
